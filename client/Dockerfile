@@ -1,8 +1,10 @@
 # Build stage
-# Build stage
-FROM node:18-slim AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /usr/src/app
+
+ENV CI=1
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 COPY package*.json ./
 RUN npm install
