@@ -5,7 +5,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: party-card-game-server:1.0
+    image: party-card-game-server:1.1
     container_name: party-card-server
     restart: always
     ports:
@@ -17,7 +17,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    image: party-card-game-client:1.0
+    image: party-card-game-client:1.1
     container_name: party-card-client
     restart: always
     ports:
