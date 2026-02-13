@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: party-card-client
+  namespace: party-card-game
+  labels:
+    app: party-card-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: party-card-client
+  template:
+    metadata:
+      labels:
+        app: party-card-client
+    spec:
+      containers:
+        - name: client
+          image: party-card-game-client:1.1 # Image must be available in K3s
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          # Environment variables here if Nginx config can be injected, but mostly static.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: party-card-client
+  namespace: party-card-game
+spec:
+  selector:
+    app: party-card-client
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
